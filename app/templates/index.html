@@ -9,6 +9,9 @@
 <body>
     <div class="container">
         <h1>Administrador de Inventario</h1>
+        <form action="{{ url_for('main.logout') }}" method="post" style="display: inline;">
+            <button type="submit" class="cerraSesion">Cerrar Sesión</button>
+        </form>
         <form id="product-form">
             <input type="hidden" id="product-id">
             <input type="text" id="name" placeholder="Nombre del producto" required>
@@ -27,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los productos se insertarán aquí dinámicamente -->
+                
             </tbody>
         </table>
     </div>

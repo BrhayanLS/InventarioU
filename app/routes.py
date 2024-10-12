@@ -1,11 +1,15 @@
-from flask import Blueprint, jsonify, request, render_template
-from .crud import create_product, get_product, update_product, delete_product, get_all_products
+from flask import Blueprint, jsonify, request, render_template, session, redirect, url_for
+from werkzeug.security import check_password_hash
+from .crud import create_product, get_product, update_product, delete_product, get_all_products, create_user, get_user_by_username
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    if 'user_id' not in session:  # Verifica si el usuario está autenticado
+        return redirect(url_for('main.login'))  # Redirige a la página de inicio de sesión
+    return render_template('index.html')  # Muestra la página de inicio si está autenticado
+
 
 @main.route('/product', methods=['GET', 'POST'])
 def product():
@@ -29,3 +33,27 @@ def product_detail(id):
     elif request.method == 'DELETE':
         delete_product(id)
         return jsonify({'message': 'Product deleted successfully'})
+    
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        data = request.form
+        user = get_user_by_username(data['username'])
+        if user and user.check_password(data['password']):
+            session['user_id'] = user.id
+            return redirect(url_for('main.index'))
+        return 'Invalid username or password', 401
+    return render_template('login.html')
+
+@main.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        data = request.form
+        user = create_user(data['username'], data['password'])
+        return redirect(url_for('main.login'))
+    return render_template('register.html')
+
+@main.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)  # Elimina el ID del usuario de la sesión
+    return redirect(url_for('main.login'))  # Redirige a la página de inicio de sesión

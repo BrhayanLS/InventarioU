@@ -25,7 +25,8 @@ form {
 }
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='password'] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -60,4 +61,18 @@ th, td {
 th {
     background-color: #333;
     color: #fff;
+}
+
+cerraSesion {
+    padding: 10px 15px;
+    background-color: #f44336; /* Color rojo */
+    color: white; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+cerraSesion:hover {
+    background-color: #d32f2f; /* Color rojo más oscuro al pasar el mouse */
 }
