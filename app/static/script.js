@@ -30,7 +30,7 @@ function loadProducts() {
 function resetForm() {
     productForm.reset();
     productIdField.value = '';
-    submitButton.textContent = 'Añadir Producto';
+    btnProducto.textContent = 'Añadir Producto';
 }
 
 function editProduct(id, name, quantity, price) {
@@ -38,7 +38,7 @@ function editProduct(id, name, quantity, price) {
     document.getElementById('name').value = name;
     document.getElementById('quantity').value = quantity;
     document.getElementById('price').value = price;
-    submitButton.textContent = 'Actualizar Producto';
+    btnProducto.textContent = 'Actualizar Producto';
 }
 
 function deleteProduct(id) {
@@ -63,10 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
     productIdField = document.getElementById('product-id');
     submitButton = document.querySelector('button[type="submit"]');
 
-    // Cargar productos al iniciar
     loadProducts();
 
-    // Manejar envío del formulario
     productForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const id = productIdField.value;
@@ -75,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const price = document.getElementById('price').value;
 
         if (id) {
-            // Actualizar producto existente
             fetch(`/product/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -93,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
             });
         } else {
-            // Crear nuevo producto
             fetch('/product', {
                 method: 'POST',
                 headers: {

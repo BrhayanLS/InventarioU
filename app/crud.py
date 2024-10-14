@@ -28,7 +28,7 @@ def delete_product(id):
 
 def create_user(username, password):
     new_user = User(username=username)
-    new_user.set_password(password)  # Encripta la contraseña
+    new_user.set_password(password)
     db.session.add(new_user)
     db.session.commit()
     return new_user

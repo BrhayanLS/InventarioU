@@ -6,9 +6,9 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    if 'user_id' not in session:  # Verifica si el usuario está autenticado
-        return redirect(url_for('main.login'))  # Redirige a la página de inicio de sesión
-    return render_template('index.html')  # Muestra la página de inicio si está autenticado
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    return render_template('index.html')
 
 
 @main.route('/product', methods=['GET', 'POST'])
@@ -55,5 +55,5 @@ def register():
 
 @main.route('/logout', methods=['POST'])
 def logout():
-    session.pop('user_id', None)  # Elimina el ID del usuario de la sesión
-    return redirect(url_for('main.login'))  # Redirige a la página de inicio de sesión
+    session.pop('user_id', None)
+    return redirect(url_for('main.login'))

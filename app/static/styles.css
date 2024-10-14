@@ -65,8 +65,8 @@ th {
 
 cerraSesion {
     padding: 10px 15px;
-    background-color: #f44336; /* Color rojo */
-    color: white; /* Texto blanco */
+    background-color: #f44336;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -74,5 +74,5 @@ cerraSesion {
 }
 
 cerraSesion:hover {
-    background-color: #d32f2f; /* Color rojo más oscuro al pasar el mouse */
+    background-color: #d32f2f;
 }
